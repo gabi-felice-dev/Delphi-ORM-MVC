@@ -25,7 +25,7 @@ type
     property Descricao: String read FDescricao write FDescricao;
     [Campo('PRECOVENDA'), Format('#.##0,00')]
     property PrecoVenda: Double read FPrecoVenda write FPrecoVenda;
-    [Campo('FOTO', 'Blob')]
+    [Campo('FOTO')]
     property Foto: TStream read FFoto write setFoto;
   end;
 
