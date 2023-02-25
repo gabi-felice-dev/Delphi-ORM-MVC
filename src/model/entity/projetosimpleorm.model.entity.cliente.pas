@@ -17,8 +17,8 @@ type
     FCpfCnpj: String;
     FEmail: String;
     FTelefone: String;
-    FFoto: TStream;
-    procedure SetFoto(const Value: TStream);
+    {FFoto: TStream;
+    procedure SetFoto(const Value: TStream); }
   public
     constructor Create;
     destructor Destroy; override;
@@ -34,8 +34,8 @@ type
     property Email: String read FEmail write FEmail;
     [Campo('TELEFONE')]
     property Telefone: String read FTelefone write FTelefone;
-    [Campo('FOTO')]
-    property Foto: TStream read FFoto write SetFoto;
+   { [Campo('FOTO')]
+    property Foto: TStream read FFoto write SetFoto; }
   end;
 
 implementation
@@ -44,16 +44,16 @@ implementation
 
 constructor TCliente.Create;
 begin
-  FFoto := TMemoryStream.Create;
+  //FFoto := TMemoryStream.Create;
 end;
 
 destructor TCliente.Destroy;
 begin
-  FFoto.DisposeOf;
+  //FFoto.DisposeOf;
   inherited;
 end;
 
-procedure TCliente.SetFoto(const Value: TStream);
+{procedure TCliente.SetFoto(const Value: TStream);
 begin
   if not Assigned(Value) then
   begin
@@ -62,6 +62,6 @@ begin
   end;
   Value.Position := 0;
   TMemoryStream(FFoto).LoadFromStream(Value);
-end;
+end; }
 
 end.

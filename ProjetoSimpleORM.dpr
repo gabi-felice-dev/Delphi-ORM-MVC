@@ -2,7 +2,6 @@ program ProjetoSimpleORM;
 {$R *.dres}
 uses
   Vcl.Forms,
-  projetosimpleorm.view.pages.cliente in 'src\view\pages\projetosimpleorm.view.pages.cliente.pas' {PageCliente},
   projetosimpleorm.view.pages.configuracoes in 'src\view\pages\projetosimpleorm.view.pages.configuracoes.pas' {PageConfiguracoes},
   projetosimpleorm.view.pages.pedidovenda in 'src\view\pages\projetosimpleorm.view.pages.pedidovenda.pas' {PagePedidoVenda},
   projetosimpleorm.view.pages.produto in 'src\view\pages\projetosimpleorm.view.pages.produto.pas' {PageProduto},
@@ -30,12 +29,15 @@ uses
   projetosimpleorm.controller.dto.impl.pessoa in 'src\controller\dto\impl\projetosimpleorm.controller.dto.impl.pessoa.pas',
   projetosimpleorm.controller.dto.impl.produto in 'src\controller\dto\impl\projetosimpleorm.controller.dto.impl.produto.pas',
   projetosimpleorm.controller.impl.controller in 'src\controller\impl\projetosimpleorm.controller.impl.controller.pas',
-  projetosimpleorm.controller.dto.interfaces in 'src\controller\dto\projetosimpleorm.controller.dto.interfaces.pas';
+  projetosimpleorm.controller.dto.interfaces in 'src\controller\dto\projetosimpleorm.controller.dto.interfaces.pas',
+  projetosimpleorm.view.pages.cliente in 'src\view\pages\projetosimpleorm.view.pages.cliente.pas' {PageCliente};
 
 {$R *.res}
 begin
   Application.Initialize;
+  ReportMemoryLeaksOnShutdown := True;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TPagePedidoVenda, PagePedidoVenda);
+  Application.CreateForm(TPageCliente, PageCliente);
   Application.Run;
 end.

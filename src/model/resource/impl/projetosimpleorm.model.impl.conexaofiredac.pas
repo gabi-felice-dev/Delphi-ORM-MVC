@@ -39,25 +39,24 @@ implementation
 function TConexao.Connect: TCustomConnection;
 begin
  try
-   FConn.Params.DriverID := FConfiguracao.DriverID;
-   FConn.Params.Database := FConfiguracao.Database;
-   FConn.Params.UserName := FConfiguracao.UserName;
-   FConn.Params.Password := FConfiguracao.Password;
-   FConn.Params.Add('Port=' + FConfiguracao.Port);
-   FConn.Params.Add('Server=' + FConfiguracao.Server);
+    FConn.Params.DriverID := FConfiguracao.DriverID;
+    FConn.Params.Database := FConfiguracao.Database;
+    FConn.Params.UserName := FConfiguracao.UserName;
+    FConn.Params.Password := FConfiguracao.Password;
+    FConn.Params.Add('Port=' + FConfiguracao.Port);
+    FConn.Params.Add('Server=' + FConfiguracao.Server);
 
-   if not FConfiguracao.Schema.IsEmpty then
-   begin
-     FConn.Params.Add('MetaCurSchema=' + FConfiguracao.Schema);
-     FConn.Params.Add('MetaDefSchema=' + FConfiguracao.Schema);
-   end;
+    if not FConfiguracao.Schema.IsEmpty then
+    begin
+      FConn.Params.Add('MetaCurSchema=' + FConfiguracao.Schema);
+      FConn.Params.Add('MetaDefSchema=' + FConfiguracao.Schema);
+    end;
 
-   if not FConfiguracao.Locking.IsEmpty then
-     FConn.Params.Add('LockingMode=' + FConfiguracao.Schema);
+    if not FConfiguracao.Locking.isEmpty then
+      FConn.Params.Add('LockingMode=' + FConfiguracao.Locking);
 
-   FConn.Connected := True;
-
-   Result := FConn;
+    FConn.Connected := True;
+    Result := FConn;
  except
    raise Exception.Create('Não foi possível realizar a conexão.');
  end;
@@ -65,8 +64,8 @@ end;
 
 constructor TConexao.Create(Configuracao: iConfiguracao) ;
 begin
+  FConn:= TFDConnection.Create(nil);
   FConfiguracao := Configuracao;
-  FConn := TFDConnection.Create(nil)
 end;
 
 destructor TConexao.Destroy;

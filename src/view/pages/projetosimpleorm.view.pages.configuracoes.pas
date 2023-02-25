@@ -1,7 +1,5 @@
 unit projetosimpleorm.view.pages.configuracoes;
-
 interface
-
 uses
   Winapi.Windows,
   Winapi.Messages,
@@ -15,8 +13,9 @@ uses
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
   Vcl.Buttons,
-  Vcl.Imaging.pngimage;
-
+  Vcl.Imaging.pngimage,
+  projetosimpleorm.controller.interfaces,
+  projetosimpleorm.controller.impl.controller;
 type
   TPageConfiguracoes = class(TForm)
     pnlContainer: TPanel;
@@ -66,23 +65,62 @@ type
     Shape12: TShape;
     edtServidor: TEdit;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
-
+    FController : iController;
+    procedure CarregarDados;
   public
     { Public declarations }
   end;
-
 var
   PageConfiguracoes: TPageConfiguracoes;
-
 implementation
-
 {$R *.dfm}
-
 
 procedure TPageConfiguracoes.SpeedButton1Click(Sender: TObject);
 begin
   Close;
+end;
+procedure TPageConfiguracoes.SpeedButton2Click(Sender: TObject);
+begin
+  try
+     FController.Configuracao
+      .DriverID(edtTipo.Text)
+      .Database(edtPath.Text)
+      .UserName(edtUserName.Text)
+      .Password(edtPassword.Text)
+      .Port(edtPorta.Text)
+      .Server(edtServidor.Text)
+      .Schema(edtSchema.Text)
+      .Locking(edtLocking.Text);
+      ShowMessage('Dados Gravados com sucesso.');
+  except on E: Exception do
+    raise Exception.Create('Erro ao tentar gravar dados:' + E.Message);
+  end;
+end;
+
+procedure TPageConfiguracoes.CarregarDados;
+begin
+  edtTipo.Text     := FController.Configuracao.DriverID;
+  edtPath.Text     := FController.Configuracao.Database;
+  edtUserName.Text := FController.Configuracao.UserName;
+  edtPassword.Text := FController.Configuracao.Password;
+  edtPorta.Text    := FController.Configuracao.Port;
+  edtSchema.Text   := FController.Configuracao.Schema;
+  edtLocking.Text  := FController.Configuracao.Locking;
+  edtServidor.Text := FController.Configuracao.Server;
+end;
+
+procedure TPageConfiguracoes.FormCreate(Sender: TObject);
+begin
+  FController := TController.New;
+end;
+
+procedure TPageConfiguracoes.FormShow(Sender: TObject);
+begin
+  CarregarDados;
 end;
 
 end.

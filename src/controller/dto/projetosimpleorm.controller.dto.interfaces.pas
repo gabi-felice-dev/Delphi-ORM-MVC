@@ -26,8 +26,8 @@ type
     function Email: String; overload;
     function Telefone(Value: String): iCliente; overload;
     function Telefone: String; overload;
-    function Foto(Value: TStream): iCliente; overload;
-    function Foto: TStream; overload;
+   { function Foto(Value: TStream): iCliente; overload;
+    function Foto: TStream; overload;   }
     function Build: iService<TCliente>;
   end;
 
@@ -70,8 +70,8 @@ type
     function Descricao: String; overload;
     function PrecoVenda(Value: Double): iProduto; overload;
     function PrecoVenda: Double; overload;
-    function Foto(Value: TStream): iProduto; overload;
-    function Foto: TStream; overload;
+  {  function Foto(Value: TStream): iProduto; overload;
+    function Foto: TStream; overload;  }
     function Build: iService<TProduto>;
   end;
 

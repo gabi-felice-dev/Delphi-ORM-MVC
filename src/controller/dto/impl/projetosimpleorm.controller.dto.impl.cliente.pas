@@ -30,8 +30,8 @@ type
     function Email: String; overload;
     function Telefone(Value: String): iCliente; overload;
     function Telefone: String; overload;
-    function Foto(Value: TStream): iCliente; overload;
-    function Foto: TStream; overload;
+   { function Foto(Value: TStream): iCliente; overload;
+    function Foto: TStream; overload; }
     function Build: iService<TCliente>;
   end;
 
@@ -76,7 +76,7 @@ begin
   FEntity.Email := Value;
 end;
 
-function TClienteDTO.Foto(Value: TStream): iCliente;
+{function TClienteDTO.Foto(Value: TStream): iCliente;
 begin
   Result := Self;
   FEntity.Foto := Value;
@@ -85,7 +85,7 @@ end;
 function TClienteDTO.Foto: TStream;
 begin
   Result := FEntity.Foto;
-end;
+end; }
 
 function TClienteDTO.Id(Value: Integer): iCliente;
 begin

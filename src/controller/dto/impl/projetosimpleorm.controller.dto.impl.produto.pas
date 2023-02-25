@@ -24,8 +24,8 @@ type
     function Descricao: String; overload;
     function PrecoVenda(Value: Double): iProduto; overload;
     function PrecoVenda: Double; overload;
-    function Foto(Value: TStream): iProduto; overload;
-    function Foto: TStream; overload;
+ {   function Foto(Value: TStream): iProduto; overload;
+    function Foto: TStream; overload;  }
     function Build: iService<TProduto>;
   end;
 
@@ -59,16 +59,16 @@ begin
   inherited;
 end;
 
-function TProdutoDTO.Foto: TStream;
+{function TProdutoDTO.Foto: TStream;
 begin
   Result := FEntity.Foto;
-end;
+end; }
 
-function TProdutoDTO.Foto(Value: TStream): iProduto;
+{function TProdutoDTO.Foto(Value: TStream): iProduto;
 begin
   Result := Self;
   FEntity.Foto := Value;
-end;
+end; }
 
 function TProdutoDTO.Id(Value: Integer): iProduto;
 begin
@@ -98,3 +98,4 @@ begin
 end;
 
 end.
+
